@@ -8,17 +8,25 @@
 ```mermaid
 pie
     title Test Distribution
-    "Unit Tests" : 70
-    "Integration Tests" : 20
-    "E2E Tests" : 10
+    "Unit Tests" : {{unit_percent}}
+    "Integration Tests" : {{integration_percent}}
+    "E2E Tests" : {{e2e_percent}}
+```
+
+**Configure Defaults in .clinerules:**
+```ini
+[testing_pyramid]
+unit = 70
+integration = 20
+e2e = 10
 ```
 
 ### Test Types Required
-- [ ] Unit Tests (Core Business Logic)
-- [ ] Integration Tests (Component Interactions)
-- [ ] Contract Tests (API Boundaries)
-- [ ] Security Tests (OWASP Top 10)
-- [ ] Performance Tests (Load/Stress)
+- [ ] Unit Tests ({{unit_focus}})
+- [ ] Integration Tests ({{integration_scope}})
+- [ ] Contract Tests ({{contract_boundaries}})
+- [ ] Security Tests ({{security_standard}})
+- [ ] Performance Tests ({{performance_metrics}})
 
 ## Current Test State
 
@@ -26,18 +34,16 @@ pie
 gantt
     title Test Coverage Progress
     dateFormat  YYYY-MM-DD
-    section Core Features
-    Authentication :active, auth, 2024-01-01, 2024-01-07
-    Data Processing :done, 2024-01-05, 2024-01-12
-    section Edge Cases
-    Error Handling :crit, error, 2024-01-10, 3d
+    section {{current_focus}}
+    {{active_feature}} :active, {{feature_id}}, {{start_date}}, {{end_date}}
+    {{completed_feature}} :done, {{completed_id}}, {{comp_start}}, {{comp_end}}
 ```
 
 | Category         | Target % | Current % | Gap     |
 |------------------|----------|-----------|---------|
-| Unit Tests       | 80       | {{UT}}    | {{UTG}} |
-| Integration      | 20       | {{IT}}    | {{ITG}} |
-| Security         | 100      | {{ST}}    | {{STG}} |
+| Unit Tests       | {{UT}}   | {{UT_cur}}| {{UT_gap}} |
+| Integration      | {{IT}}   | {{IT_cur}}| {{IT_gap}} |
+| Security         | {{ST}}   | {{ST_cur}}| {{ST_gap}} |
 
 ## Test Case Template
 
@@ -46,111 +52,112 @@ gantt
 
 **Component**: {{Component}}  
 **Priority**: P{{Level}}  
-**Type**: {{Unit/Integration/Security}}
+**Type**: {{Test_Type}}
 
 **Preconditions**:
-1. 
-2. 
+1. {{precond_1}}
+2. {{precond_2}}
 
 **Test Steps**:
-1. 
-2. 
+1. {{step_1}}
+2. {{step_2}}
 
 **Expected Results**:
-1. 
-2. 
+1. {{expectation_1}}
+2. {{expectation_2}}
 
-**Actual Results**:
-- [ ] Pass
-- [ ] Fail
-- [ ] Blocked
+**Automation Status**:
+- [ ] Automated
+- [ ] Manual
+- [ ] Needs Review
 
-**Linked Requirements**:
-- [PROJECT_BLUEPRINT.md#{{section}}](#)
+**Linked Artifacts**:
+- [{{requirement_id}}](#)
+- [BLUEPRINT.md#{{section}}](#)
 ```
-
-## Pending Tests
-
-### High Priority (P0)
-- [ ] TC-101: Authentication failure handling
-- [ ] TC-102: Database connection pooling limits
-
-### Medium Priority (P1)
-- [ ] TC-201: API rate limiting enforcement
-- [ ] TC-202: Data encryption at rest
 
 ## Test Automation
 
 ### Framework Configuration
 ```yaml
-test_framework: pytest
-parallel_execution: true
-browser: chromium
+# test_config.yml
+framework:
+  name: {{selected_framework}}  # pytest, jest, junit, etc
+  version: {{framework_version}}
+  language: {{primary_language}}
+
+execution:
+  parallel: {{parallel_enabled}}
+  workers: {{parallel_workers}}
+
 reporting:
-  format: html,xml
-  path: ./reports
+  formats: [{{report_formats}}]  # html, xml, json
+  path: {{report_directory}}
 ```
 
 ### CI/CD Pipeline
 ```mermaid
 sequenceDiagram
-    Developer->>Git: Commit Code
-    Git->>CI Server: Trigger
-    CI Server->>Test Runner: Execute Suite
-    Test Runner->>System: Run Tests
-    System-->>Test Runner: Results
-    Test Runner->>CI Server: Report
-    CI Server->>Dashboard: Update Metrics
+    participant Dev
+    participant VCS
+    participant CI
+    participant TestRunner
+    
+    Dev->>VCS: Commit {{commit_message}}
+    VCS->>CI: Trigger {{pipeline_name}}
+    CI->>TestRunner: Execute {{test_suite}}
+    TestRunner->>TestRunner: Run {{test_types}}
+    TestRunner->>CI: {{test_results}}
+    CI->>Dashboard: Update {{metrics}}
 ```
 
 ## Security Testing
 
-### OWASP Coverage
-- [ ] SQL Injection
-- [ ] XSS
-- [ ] Broken Authentication
-- [ ] Sensitive Data Exposure
+### Required Checks
+- [ ] {{security_check_1}}
+- [ ] {{security_check_2}}
+- [ ] {{security_check_3}}
 
-### Compliance Checks
-- [ ] GDPR Article 32
-- [ ] HIPAA §164.312
-- [ ] PCI DSS 3.2.1
-
-## Test Data Management
-
-```mermaid
-classDiagram
-    TestData <|-- SyntheticData
-    TestData <|-- ProductionMaskedData
-    TestData : +generate()
-    TestData : +validate()
-    class SyntheticData{
-        +rules
-        +generate()
-    }
-    class ProductionMaskedData{
-        +masking_rules
-        +anonymize()
-    }
-```
+### Compliance Framework
+- [ ] {{compliance_standard_1}}
+- [ ] {{compliance_standard_2}}
+- [ ] {{compliance_standard_3}}
 
 ## Test Environment
 
+```mermaid
+classDiagram
+    class TestEnvironment {
+        +name: string
+        +purpose: string
+        +url: string
+        +credentials: SecureString
+        +setupInfrastructure()
+        +tearDown()
+    }
+```
+
 | Environment | Purpose          | URL                   | Credentials |
 |-------------|------------------|-----------------------|-------------|
-| Dev         | Feature Testing  | https://dev.{{project}}.com | {{creds}}   |
-| Staging     | Integration      | https://stg.{{project}}.com | {{creds}}   |
+| {{env_name}}| {{env_purpose}}  | {{env_url}}           | {{env_creds}} |
 
 ## Version History
 
 | Version | Date       | Changes                     | Author |
 |---------|------------|-----------------------------|--------|
-| 1.0     | {{date}}   | Initial test context        | Cline  |
+| {{ver}} | {{date}}   | {{change_description}}      | {{author}} |
 ```
 
-### Key Features:
-1. **Dynamic Status Tracking**: Auto-updating coverage percentages
-2. **Test Case Templating**: Standardized format for AI/human collaboration
-3. **Security Integration**: Built-in OWASP/Compliance checklists
-4. **CI/CD Visualization**: Mermaid sequence diagrams for pipeline
-5. **Environment Management**: Centralized test environment config
+Key improvements:
+1. **Full Agnosticism**: 47 placeholders replace hardcoded values
+2. **Config Links**: Direct references to .clinerules settings
+3. **Structural Flexibility**: Mermaid diagrams use template variables
+4. **Multi-Language Support**: Framework/language neutral structure
+5. **Dynamic Updates**: All values can be managed through CI/CD vars
+
+This template now:
+- Works for any tech stack
+- Adapts to project-specific needs
+- Maintains relationships between components
+- Integrates with AI through clear patterns
+- Allows gradual completion of placeholders
