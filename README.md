@@ -1,22 +1,3 @@
-<think>
-Okay, I need to generate a README.md for the combined system that the user has been working on. Let me start by understanding what the user wants. They want a GitHub README that explains how the system works, why it's built, and how to use it step by step. 
-
-First, I'll recall the previous interactions. The user combined two AI-assisted coding systems into one, focusing on documentation-first development and test-driven development (TDD). The key components are the PROJECT_BLUEPRINT.md, TestingContext.md, .clinerules, and Integration_Guide.md. There's also a specific workflow involving these files.
-
-The README should start with a clear title and a brief introduction. The "Why Cline AI Development System?" section should highlight the benefits: combining documentation and TDD, reducing complexity, etc. Then, a "Core Principles" section can list the main ideas like Documentation-First and TDD.
-
-Next, the "Key Features" section should outline the main files and their purposes. I'll need to mention the four core template files and what each does. The "Getting Started" part needs a step-by-step guide: installation, file setup, configuring the AI, etc. Including code blocks for commands would be helpful here.
-
-The "Workflow Visualization" with a Mermaid diagram will help users understand the process visually. Then, a "Template Files Overview" can detail each file's structure. Including example snippets for PROJECT_BLUEPRINT.md and .clinerules would make it concrete.
-
-The "Advanced Usage" section can cover customization and CI/CD integration. "Best Practices" should list dos and don'ts. A FAQ section can preempt common questions. Finally, include contribution guidelines and a license.
-
-I need to ensure that all the key points from the previous recommendations are included, like the conflict resolutions and the simplified file structure. Also, make sure the language is clear and instructions are actionable. Check for consistency in file names and commands. Avoid markdown errors, especially in code blocks and Mermaid diagrams. Make sure links and references are correctly formatted.
-</think>
-
-Here's a comprehensive README.md for your integrated system:
-
-```markdown
 # Cline AI Development System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
